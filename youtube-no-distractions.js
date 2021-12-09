@@ -34,8 +34,8 @@
         'button[data-tooltip-target-id="ytp-autonav-toggle-button"]', // autoplay button
         'button.playerButton#infoButton', //sponsorblock info
         '.badge-style-type-verified', //verified badge
-
-        //'#clarify-box', //covid warning
+        '.super-title', //tags, other shit above title
+        '#clarify-box', //covid warning
     ];
 
     if(BAD_PATHS.includes(window.location.pathname)) {
@@ -44,12 +44,26 @@
 
     addGlobalStyle(SELECTORS_TO_HIDE.join(', ') + ' { display: none; }');
 
-    addGlobalStyle("ytd-playlist-sidebar-renderer.ytd-browse {left: 0; }");
+    addGlobalStyle("#header, ytd-playlist-sidebar-renderer.ytd-browse {left: 0; }");
     addGlobalStyle('#page-manager { margin-left: 0; }');
 
     addGlobalStyle('#metadata > * { display: none; }');
     addGlobalStyle('#metadata > #byline-container { display: initial; }');
     addGlobalStyle('#video-title { max-height: none; -webkit-line-clamp: unset; }');
+
+
+
+
+
+
+    function addGlobalStyle(css) {
+        let head = document.getElementsByTagName('head')[0];
+        if (!head) { return; }
+        let style = document.createElement('style');
+        style.type = 'text/css';
+        style.innerHTML = css.replace(/;/g, ' !important;');
+        head.appendChild(style);
+    }
 
 
     //mutation observer
@@ -84,17 +98,6 @@
     //        }
     //    }
     //});
-
-
-
-    function addGlobalStyle(css) {
-        let head = document.getElementsByTagName('head')[0];
-        if (!head) { return; }
-        let style = document.createElement('style');
-        style.type = 'text/css';
-        style.innerHTML = css.replace(/;/g, ' !important;');
-        head.appendChild(style);
-    }
 
     //function observerFactory(element, callback) {
     //    const observerConfig = { attributes: true, childList: true, subtree: true };
